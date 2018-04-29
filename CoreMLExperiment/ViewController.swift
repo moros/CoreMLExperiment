@@ -13,6 +13,7 @@ import Vision
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var label: UILabel!
     
     let imagePicker = UIImagePickerController()
     
@@ -50,7 +51,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 fatalError("Could downcast request.results to [VNClassificationObservation]")
             }
             
-            print(results)
+            if let classification = results.first {
+                self.label.text = classification.identifier
+            }
         }
         
         let handler = VNImageRequestHandler(ciImage: image)
